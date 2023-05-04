@@ -7,11 +7,11 @@ abstract class BaseState<
     TBloc extends BlocBase<TBlocState>,
     TBlocState extends BaseBlocState> extends State<TState> {
 
-  TBloc? bloc;
+  TBloc? _bloc;
 
   @override
   void initState() {
-    bloc = createBloc(context);
+    _bloc = createBloc(context);
     super.initState();
   }
 
@@ -33,7 +33,7 @@ abstract class BaseState<
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TBloc, TBlocState>(
-      bloc: bloc,
+      bloc: _bloc,
       builder: (context, state) {
         if (state is ErrorBlocState) {
           return buildError(context, state);
