@@ -5,15 +5,15 @@ import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos
 class PhotosCubit extends BaseCubit<PhotosState> {
   final GetPhotosUseCase getPhotosUseCase;
 
-  PhotosCubit(this.getPhotosUseCase) : super(PhotosLoadingState());
+  PhotosCubit(this.getPhotosUseCase);
 
   void loadPhotos() {
     getPhotosUseCase(
       (result) {
-        emit(PhotosLoadedState(result));
+        emitState(PhotosLoadedState(result));
       },
       (error) {
-        showError(error);
+        emitError(error);
       },
     );
   }

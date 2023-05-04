@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_stock_unsplash_flutter/core/bloc/base_state.dart';
+import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_state.dart';
 
 abstract class BaseState<
     TState extends StatefulWidget,
-    TBloc extends BlocBase<TBlocState>,
-    TBlocState extends BaseBlocState> extends State<TState> {
+    TBloc extends BlocBase<BaseBlocState>, TBlocState> extends State<TState> {
 
   TBloc? _bloc;
 
@@ -17,22 +16,24 @@ abstract class BaseState<
 
   TBloc createBloc(BuildContext context);
 
-  Widget buildWidget(BuildContext context, TBlocState state);
+  Widget buildWidget(BuildContext context, TBlocState result);
 
   Widget buildError(BuildContext context, ErrorBlocState state) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(state.failure.message),
-        duration: const Duration(seconds: 2),
-      ),
-    );
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(state.failure.message),
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    });
 
     return Container();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<TBloc, TBlocState>(
+    return BlocBuilder<TBloc, BaseBlocState>(
       bloc: _bloc,
       builder: (context, state) {
         if (state is ErrorBlocState) {
@@ -44,8 +45,10 @@ abstract class BaseState<
               child: CircularProgressIndicator(),
             ),
           );
+        } else if (state is ResultBlocState) {
+          return buildWidget(context, state.state);
         } else {
-          return buildWidget(context, state);
+          return Container();
         }
       },
     );

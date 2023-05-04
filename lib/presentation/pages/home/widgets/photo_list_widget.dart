@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_stock_unsplash_flutter/core/ui/base_bloc_builder.dart';
+import 'package:image_stock_unsplash_flutter/core/ui/base_state.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos_cubit.dart';
@@ -7,14 +7,14 @@ import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/image_card_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/switch_list_view_widget.dart';
 
-class PhotosList extends StatefulWidget {
-  const PhotosList({super.key});
+class PhotosListWidget extends StatefulWidget {
+  const PhotosListWidget({super.key});
 
   @override
-  State<StatefulWidget> createState() => PhotosListState();
+  State<StatefulWidget> createState() => PhotosListWidgetState();
 }
 
-class PhotosListState extends BaseState<PhotosList, PhotosCubit, PhotosState> {
+class PhotosListWidgetState extends BaseState<PhotosListWidget, PhotosCubit, PhotosState> {
   var isGridView = false;
 
   @override
@@ -23,8 +23,8 @@ class PhotosListState extends BaseState<PhotosList, PhotosCubit, PhotosState> {
   }
 
   @override
-  Widget buildWidget(BuildContext context, PhotosState state) {
-    if (state is PhotosLoadedState) {
+  Widget buildWidget(BuildContext context, PhotosState result) {
+    if (result is PhotosLoadedState) {
       return Column(
         children: [
           SwitchListView(
@@ -37,8 +37,8 @@ class PhotosListState extends BaseState<PhotosList, PhotosCubit, PhotosState> {
           ),
           Expanded(
               child: isGridView
-                  ? gridListView(state.photos)
-                  : verticalListView(state.photos))
+                  ? gridListView(result.photos)
+                  : verticalListView(result.photos))
         ],
       );
     } else {

@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: const PhotosList(),
+      body: const PhotosListWidget(),
     );
   }
 }
