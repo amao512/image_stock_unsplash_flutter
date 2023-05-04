@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
-import 'package:image_stock_unsplash_flutter/presentation/pages/home/home.dart';
+import 'package:image_stock_unsplash_flutter/presentation/router/go_router.dart';
 
 import 'config/ui/theme.dart';
 import 'config/ui/theme_dark.dart';
@@ -17,11 +17,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Image Stock',
       theme: theme,
       darkTheme: darkTheme,
-      home: const HomePage(),
+      routerConfig: goRouter,
     );
   }
 }

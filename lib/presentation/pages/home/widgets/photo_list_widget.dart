@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_stock_unsplash_flutter/core/ui/base_state.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
@@ -6,6 +7,7 @@ import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos_state.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/image_card_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/switch_list_view_widget.dart';
+import 'package:image_stock_unsplash_flutter/presentation/router/routes.dart';
 
 class PhotosListWidget extends StatefulWidget {
   const PhotosListWidget({super.key});
@@ -54,7 +56,9 @@ class PhotosListWidgetState extends BaseState<PhotosListWidget, PhotosCubit, Pho
       itemBuilder: (context, index) {
         return ImageCard(
           imageUrl: photos[index].urls.regular,
-          onTap: () {},
+          onTap: () {
+            context.push(Routes.details);
+          },
         );
       },
     );
@@ -71,7 +75,9 @@ class PhotosListWidgetState extends BaseState<PhotosListWidget, PhotosCubit, Pho
         (index) {
           return ImageCard(
             imageUrl: photos[index].urls.regular,
-            onTap: () {},
+            onTap: () {
+              context.push(Routes.details);
+            },
           );
         },
       ),
