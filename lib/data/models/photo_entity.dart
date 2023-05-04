@@ -1,3 +1,8 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'photo_entity.g.dart';
+
+@JsonSerializable()
 class PhotoEntity {
   final String id;
   final PhotoUrlEntity urls;
@@ -7,14 +12,10 @@ class PhotoEntity {
     required this.urls,
   });
 
-  factory PhotoEntity.fromJson(Map<String, dynamic> json) {
-    return PhotoEntity(
-      id: json["id"] as String,
-      urls: PhotoUrlEntity.fromJson(json["urls"]),
-    );
-  }
+  factory PhotoEntity.fromJson(Map<String, dynamic> json) => _$PhotoEntityFromJson(json);
 }
 
+@JsonSerializable()
 class PhotoUrlEntity {
   final String raw;
   final String full;
@@ -26,11 +27,5 @@ class PhotoUrlEntity {
     required this.regular,
   });
 
-  factory PhotoUrlEntity.fromJson(Map<String, dynamic> json) {
-    return PhotoUrlEntity(
-      raw: json["raw"] as String,
-      full: json["full"] as String,
-      regular: json["regular"] as String,
-    );
-  }
+  factory PhotoUrlEntity.fromJson(Map<String, dynamic> json) => _$PhotoUrlEntityFromJson(json);
 }
