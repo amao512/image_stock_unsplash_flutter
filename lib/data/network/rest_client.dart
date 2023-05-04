@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:image_stock_unsplash_flutter/config/build/build_config.dart';
+import 'package:image_stock_unsplash_flutter/core/model/api_exception.dart';
 
 class RestClient {
   static Dio? _instance;
@@ -34,48 +35,41 @@ class RestClient {
           return handler.next(response);
         },
         onError: (DioError error, handler) async {
-          if (kDebugMode) {
-            print('Error: ${error.message}\n${error.stackTrace}');
-          }
-
-          if (error.response != null) {
-            if (error.response?.statusCode == 401) {
-              print("=== 401 Error ================================");
-              //   dio.interceptors.requestLock.lock();
-              //   dio.interceptors.responseLock.lock();
-              //   RequestOptions requestOptions = e.requestOptions;
-              //
-              //   await refreshToken();
-              //   Repository repository = Repository();
-              //   var accessToken = await repository.readData("accessToken");
-              //   final opts = new Options(method: requestOptions.method);
-              //   dio.options.headers["Authorization"] = "Bearer " + accessToken;
-              //   dio.options.headers["Accept"] = "*/*";
-              //   dio.interceptors.requestLock.unlock();
-              //   dio.interceptors.responseLock.unlock();
-              //   final response = await dio.request(requestOptions.path,
-              //       options: opts,
-              //       cancelToken: requestOptions.cancelToken,
-              //       onReceiveProgress: requestOptions.onReceiveProgress,
-              //       data: requestOptions.data,
-              //       queryParameters: requestOptions.queryParameters);
-              //   if (response != null) {
-              //     handler.resolve(response);
-              //   } else {
-              //     return null;
-              //   }
-              // } else {
-              //   handler.next(e);
-              // }
-            }
-          }
-
-          return handler.next(error);
+          return handleError(error, handler);
         },
       ),
     );
 
     return dio;
+  }
+
+  static handleError(DioError error, handler) {
+    if (kDebugMode) {
+      print('Error: ${error.message}\n${error.stackTrace}');
+    }
+
+    if (error.response == null) {
+      return handler.next(ApiException(
+        requestOptions: error.requestOptions,
+        message: "Internal Server Error",
+      ));
+    }
+
+    var statusCode = error.response?.statusCode;
+
+    if (statusCode == 401) {
+      refreshToken();
+
+      return handler.next(ApiException(
+        requestOptions: error.requestOptions,
+        message: "Unauthorized Error",
+      ));
+    }
+
+    return handler.next(ApiException(
+      requestOptions: error.requestOptions,
+      message: "Internal Server Error",
+    ));
   }
 
   static refreshToken() async {
@@ -93,10 +87,10 @@ class RestClient {
     //     repository.addValue('accessToken', refreshTokenResponse.data.accessToken);
     //     repository.addValue('refreshToken', refreshTokenResponse.data.refreshToken);
     //   } else {
-    //     print(response.toString()); //TODO: logout
+    //     print(response.toString());
     //   }
     // } catch (e) {
-    //   print(e.toString()); //TODO: logout
+    //   print(e.toString());
     // }
   }
 }

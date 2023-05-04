@@ -1,4 +1,4 @@
-import 'package:dio/dio.dart';
+import 'package:image_stock_unsplash_flutter/core/model/api_exception.dart';
 import 'package:image_stock_unsplash_flutter/core/model/result_api.dart';
 import 'package:image_stock_unsplash_flutter/data/models/failure.dart';
 
@@ -9,9 +9,11 @@ extension FutureExt on Future<dynamic> {
 
       return ResultApi.success(response);
     } catch (error) {
+      var exception = error as ApiException;
+
       return ResultApi.error(
         Failure(
-          message: (error as DioError).type.name,
+          message: exception.message ?? "Internal Server Error",
         ),
       );
     }
