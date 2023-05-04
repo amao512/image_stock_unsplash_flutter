@@ -35,7 +35,7 @@ class RestClient {
         },
         onError: (DioError error, handler) async {
           if (kDebugMode) {
-            print('${error.message}\n${error.stackTrace}');
+            print('Error: ${error.message}\n${error.stackTrace}');
           }
 
           if (error.response != null) {
@@ -68,9 +68,9 @@ class RestClient {
               //   handler.next(e);
               // }
             }
-
-            return handler.next(error);
           }
+
+          return handler.next(error);
         },
       ),
     );

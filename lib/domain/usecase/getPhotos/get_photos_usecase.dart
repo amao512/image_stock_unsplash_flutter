@@ -14,9 +14,9 @@ class GetPhotosUseCase extends LaunchUseCase<List<PhotoDvo>> {
   void call(
     Function(List<PhotoDvo>) onResult,
     Function(Failure) onError,
-  ) async {
+  ) {
     launch(
-      block: await repository.getPhotos(),
+      block: () => repository.getPhotos(),
       result: (value) {
         onResult(mapPhotoToDvo(value));
       },
