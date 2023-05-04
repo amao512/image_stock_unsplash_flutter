@@ -1,10 +1,16 @@
+import 'package:image_stock_unsplash_flutter/domain/model/photo_user_dvo.dart';
+
 class PhotoDvo {
   final String id;
   final PhotoUrlDvo urls;
+  // final PhotoUserDvo user;
+  // final List<PhotoTagDvo> tags;
 
   PhotoDvo({
     required this.id,
     required this.urls,
+    // required this.user,
+    // required this.tags,
   });
 }
 
@@ -18,4 +24,10 @@ class PhotoUrlDvo {
     required this.full,
     required this.regular,
   });
+}
+
+class PhotoTagDvo {
+  final String title;
+
+  PhotoTagDvo({required this.title});
 }

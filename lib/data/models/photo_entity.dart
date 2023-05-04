@@ -1,3 +1,4 @@
+import 'package:image_stock_unsplash_flutter/data/models/photo_user_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'photo_entity.g.dart';
@@ -6,13 +7,18 @@ part 'photo_entity.g.dart';
 class PhotoEntity {
   final String id;
   final PhotoUrlEntity urls;
+  // final PhotoUserEntity user;
+  // @JsonKey(defaultValue: [])
+  // final List<PhotoTagEntity>? tags;
 
   PhotoEntity({
     required this.id,
     required this.urls,
+    // required this.user,
   });
 
-  factory PhotoEntity.fromJson(Map<String, dynamic> json) => _$PhotoEntityFromJson(json);
+  factory PhotoEntity.fromJson(Map<String, dynamic> json) =>
+      _$PhotoEntityFromJson(json);
 }
 
 @JsonSerializable()
@@ -27,5 +33,15 @@ class PhotoUrlEntity {
     required this.regular,
   });
 
-  factory PhotoUrlEntity.fromJson(Map<String, dynamic> json) => _$PhotoUrlEntityFromJson(json);
+  factory PhotoUrlEntity.fromJson(Map<String, dynamic> json) =>
+      _$PhotoUrlEntityFromJson(json);
+}
+
+@JsonSerializable()
+class PhotoTagEntity {
+  final String title;
+
+  PhotoTagEntity(this.title);
+
+  factory PhotoTagEntity.fromJson(Map<String, dynamic> json) => _$PhotoTagEntityFromJson(json);
 }

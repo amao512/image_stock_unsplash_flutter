@@ -1,19 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:image_stock_unsplash_flutter/core/ui/base_state.dart';
+import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
+import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_cubit.dart';
+import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_state.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/widgets/profile_actions_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/widgets/similar_photos_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/widgets/tags_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/image_card_widget.dart';
 
 class PhotoDetailsPage extends StatefulWidget {
-  const PhotoDetailsPage({super.key});
+  final String photoId;
+
+  const PhotoDetailsPage({required this.photoId, super.key});
 
   @override
   State<StatefulWidget> createState() => PhotoDetailsState();
 }
 
-class PhotoDetailsState extends State<PhotoDetailsPage> {
+class PhotoDetailsState extends BaseState<PhotoDetailsPage, PhotoDetailsCubit,
+    PhotoDetailsBlocState> {
   @override
-  Widget build(BuildContext context) {
+  PhotoDetailsCubit createBloc(BuildContext context) {
+    return getIt<PhotoDetailsCubit>()..loadPhotoById(widget.photoId);
+  }
+
+  @override
+  Widget buildWidget(BuildContext context, PhotoDetailsBlocState result) {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 16,
@@ -31,8 +43,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                photoDetails(),
-
+                photoDetails(result),
                 const SizedBox(height: 32),
                 const Text(
                   "Похожие фотографии",
@@ -48,7 +59,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
     );
   }
 
-  Widget photoDetails() {
+  Widget photoDetails(PhotoDetailsBlocState result) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -59,8 +70,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
         ),
         const SizedBox(height: 24),
         ImageCard(
-          imageUrl:
-              "https://cdn.britannica.com/20/191120-050-B6C0B7E9/village-Hallstatt-Alps-Austria.jpg",
+          imageUrl: result.photo.urls.regular,
           onTap: () {},
         ),
         const SizedBox(height: 24),

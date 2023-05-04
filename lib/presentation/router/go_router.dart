@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:image_stock_unsplash_flutter/core/utils/extensions/string_ext.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/photo_details.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/home.dart';
 import 'package:image_stock_unsplash_flutter/presentation/router/routes.dart';
@@ -14,7 +15,9 @@ final GoRouter goRouter = GoRouter(
         GoRoute(
           path: getPathFromRoute(Routes.details),
           builder: (context, state) {
-            return const PhotoDetailsPage();
+            String photoId = state.extra as String;
+
+            return PhotoDetailsPage(photoId: photoId.orEmpty());
           },
         ),
       ],

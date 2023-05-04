@@ -18,7 +18,7 @@ class GetPhotosUseCase extends LaunchUseCase<List<PhotoDvo>> {
     launch(
       block: () => repository.getPhotos(),
       result: (value) {
-        onResult(mapPhotoToDvo(value));
+        onResult(value.mapPhotoToDvo());
       },
       error: (error) {
         onError(error);

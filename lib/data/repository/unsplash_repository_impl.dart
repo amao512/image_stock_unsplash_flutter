@@ -14,4 +14,9 @@ class UnsplashRepositoryImpl extends UnsplashRepository {
   Future<ResultApi<List<PhotoEntity>>> getPhotos() {
     return api.getPhotos().request();
   }
+
+  @override
+  Future<ResultApi<PhotoEntity>> getPhotoById(String photoId) {
+    return api.getPhotoById(photoId).request();
+  }
 }

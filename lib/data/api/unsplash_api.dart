@@ -12,4 +12,7 @@ abstract class UnsplashApi {
 
   @GET("/photos")
   Future<List<PhotoEntity>> getPhotos();
+
+  @GET("/photos/{id}")
+  Future<PhotoEntity> getPhotoById(@Path() String id);
 }

@@ -9,13 +9,19 @@ extension FutureExt on Future<dynamic> {
 
       return ResultApi.success(response);
     } catch (error) {
-      var exception = error as ApiException;
-
-      return ResultApi.error(
-        Failure(
-          message: exception.message ?? "Internal Server Error",
-        ),
-      );
+      if (error is ApiException) {
+        return ResultApi.error(
+          Failure(
+            message: error.message ?? "Internal Server Error",
+          ),
+        );
+      } else {
+        return ResultApi.error(
+          Failure(
+            message: "Internal Server Error",
+          ),
+        );
+      }
     }
   }
 }

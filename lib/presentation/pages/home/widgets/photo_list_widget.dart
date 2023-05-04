@@ -57,7 +57,7 @@ class PhotosListWidgetState extends BaseState<PhotosListWidget, PhotosCubit, Pho
         return ImageCard(
           imageUrl: photos[index].urls.regular,
           onTap: () {
-            context.push(Routes.details);
+            context.push(Routes.details, extra: photos[index].id);
           },
         );
       },
@@ -76,7 +76,7 @@ class PhotosListWidgetState extends BaseState<PhotosListWidget, PhotosCubit, Pho
           return ImageCard(
             imageUrl: photos[index].urls.regular,
             onTap: () {
-              context.push(Routes.details);
+              context.push(Routes.details, extra: photos[index].id);
             },
           );
         },
