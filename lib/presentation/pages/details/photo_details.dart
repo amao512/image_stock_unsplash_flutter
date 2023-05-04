@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/widgets/profile_actions_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/widgets/similar_photos_widget.dart';
+import 'package:image_stock_unsplash_flutter/presentation/pages/details/widgets/tags_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/image_card_widget.dart';
 
 class PhotoDetailsPage extends StatefulWidget {
@@ -28,8 +29,16 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
         child: Expanded(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                detailsWidget(),
+                photoDetails(),
+
+                const SizedBox(height: 32),
+                const Text(
+                  "Похожие фотографии",
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 16),
                 SimiliarPhotos(),
               ],
             ),
@@ -39,15 +48,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
     );
   }
 
-  final List<String> tags = [
-    "Girl",
-    "Woman",
-    "Mood",
-    "People",
-    "Free Pictures"
-  ];
-
-  Widget detailsWidget() {
+  Widget photoDetails() {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -67,13 +68,8 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
           "Похожие теги",
           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
-        const Text("Here will be tags"),
-        const SizedBox(height: 24),
-        const Text(
-          "Похожие фотографии",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
         const SizedBox(height: 16),
+        PhotoTags(),
       ],
     );
   }
