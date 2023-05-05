@@ -14,21 +14,14 @@ ThemeData darkTheme = theme.copyWith(
   colorScheme: ColorScheme.fromSwatch(
     accentColor: darkPrimaryColor,
   ),
-  iconTheme: IconThemeData(color: darkIconColor),
-  appBarTheme: AppBarTheme(
-    color: darkAppBarColor,
-    iconTheme: IconThemeData(color: darkAppBarIconColor),
+  textTheme: theme.textTheme.copyWith(
+    titleMedium: theme.textTheme.titleMedium?.copyWith(color: Colors.white),
+    bodySmall: TextStyle(color: Colors.grey[600]),
   ),
-  pageTransitionsTheme: const PageTransitionsTheme(
-    builders: {
-      TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-      TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
-    },
-  ),
-  inputDecorationTheme: InputDecorationTheme(
-    labelStyle: TextStyle(color: darkInputColor),
-    hintStyle: TextStyle(color: darkInputColor),
+  iconTheme: theme.iconTheme.copyWith(color: darkIconColor),
+  inputDecorationTheme: theme.inputDecorationTheme.copyWith(
+    labelStyle: theme.inputDecorationTheme.labelStyle?.copyWith(color: darkInputColor),
+    hintStyle: theme.inputDecorationTheme.hintStyle?.copyWith(color: darkInputColor),
     border: darkOutlineInputBorder,
     enabledBorder: darkOutlineInputBorder,
     focusedBorder: darkOutlineInputBorder,

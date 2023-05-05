@@ -3,7 +3,7 @@ import 'package:image_stock_unsplash_flutter/core/ui/widgets/round_network_image
 import 'package:image_stock_unsplash_flutter/domain/model/photo_user_dvo.dart';
 
 class ProfileActions extends StatelessWidget {
-    final PhotoUserDvo user;
+  final PhotoUserDvo user;
 
   const ProfileActions({super.key, required this.user});
 
@@ -39,7 +39,7 @@ class ProfileActions extends StatelessWidget {
           ),
           child: IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.favorite),
+            icon: const Icon(Icons.favorite, color: Colors.black),
           ),
         ),
         Card(
@@ -48,8 +48,8 @@ class ProfileActions extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.download, color: Colors.white,)
+            onPressed: () {},
+            icon: const Icon(Icons.download, color: Colors.white),
           ),
         ),
       ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:image_stock_unsplash_flutter/config/resources/theme/theme.dart';
+
 import '../colors.dart';
 
 ThemeData lightTheme = theme.copyWith(
@@ -13,19 +14,14 @@ ThemeData lightTheme = theme.copyWith(
   ),
   progressIndicatorTheme: ProgressIndicatorThemeData(color: indicatorColor),
   scaffoldBackgroundColor: scaffoldBackgroundColor,
-  iconTheme: IconThemeData(color: iconColor),
-  appBarTheme: AppBarTheme(
-    color: appBarColor,
-    iconTheme: IconThemeData(color: appBarIconColor),
+  iconTheme: theme.iconTheme.copyWith(color: iconColor),
+  textTheme: theme.textTheme.copyWith(
+    titleMedium: theme.textTheme.titleMedium?.copyWith(color: Colors.black),
+    bodySmall: TextStyle(color: Colors.grey[800]),
   ),
-  pageTransitionsTheme: const PageTransitionsTheme(builders: {
-    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
-  }),
-  inputDecorationTheme: InputDecorationTheme(
-    labelStyle: TextStyle(color: inputColor),
-    hintStyle: TextStyle(color: inputColor),
+  inputDecorationTheme: theme.inputDecorationTheme.copyWith(
+    labelStyle: theme.inputDecorationTheme.labelStyle?.copyWith(color: inputColor),
+    hintStyle: theme.inputDecorationTheme.hintStyle?.copyWith(color: inputColor),
     focusColor: inputColor,
     border: outlineInputBorder,
     enabledBorder: outlineInputBorder,
