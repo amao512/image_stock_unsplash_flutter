@@ -12,7 +12,7 @@ class PhotosCubit extends BaseCubit<PhotosState> {
       (result) {
         emitState(PhotosLoadedState(result));
       },
-      (error) {
+      onError: (error) {
         emitError(error);
       },
     );

@@ -18,9 +18,9 @@ abstract class UseCase {
 }
 
 abstract class LaunchUseCase<Type> extends UseCase {
-  void call(Function(Type) onResult, Function(Failure) onError);
+  void call(Function(Type) onResult, {Function(Failure)? onError});
 }
 
 abstract class LaunchUseCaseWithParam<Param, Type> extends UseCase {
-  void call(Param param, Function(Type) result, Function(Failure) onError);
+  void call(Param param, Function(Type) result, {Function(Failure)? onError});
 }

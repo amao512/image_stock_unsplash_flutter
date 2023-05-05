@@ -8,6 +8,6 @@ registerBloc() {
   );
 
   getIt.registerFactory(
-    () => PhotoDetailsCubit(getIt()),
+    () => PhotoDetailsCubit(getIt(), getIt()),
   );
 }

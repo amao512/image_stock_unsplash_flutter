@@ -4,8 +4,15 @@ import 'package:image_stock_unsplash_flutter/domain/model/photo_user_dvo.dart';
 
 class ProfileActions extends StatelessWidget {
   final PhotoUserDvo user;
+  final Function() onFavourite;
+  final Function() onDownload;
 
-  const ProfileActions({super.key, required this.user});
+  const ProfileActions({
+    super.key,
+    required this.user,
+    required this.onFavourite,
+    required this.onDownload,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +55,9 @@ class ProfileActions extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
           child: IconButton(
-            onPressed: () {},
+            onPressed: () {
+              onDownload();
+            },
             icon: const Icon(Icons.download, color: Colors.white),
           ),
         ),

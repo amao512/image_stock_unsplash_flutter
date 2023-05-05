@@ -12,16 +12,16 @@ class GetPhotosUseCase extends LaunchUseCase<List<PhotoDvo>> {
 
   @override
   void call(
-    Function(List<PhotoDvo>) onResult,
-    Function(Failure) onError,
-  ) {
+    Function(List<PhotoDvo>) onResult, {
+    Function(Failure)? onError,
+  }) {
     launch(
       block: () => repository.getPhotos(),
       result: (value) {
         onResult(value.mapPhotoToDvo());
       },
       error: (error) {
-        onError(error);
+        onError?.call(error);
       },
     );
   }

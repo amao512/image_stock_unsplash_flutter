@@ -42,28 +42,30 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
       body: BaseBlocProvider(
         bloc: cubit,
         builder: (context, state) {
-          var result = state as PhotoDetailsBlocState;
-
-          return Container(
-            padding: const EdgeInsets.only(right: 16, left: 16),
-            child: Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    photoDetails(result, context),
-                    const SizedBox(height: 32),
-                    Text(
-                      context.getString(Strings.similarPhotos),
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    const SizedBox(height: 16),
-                    SimilarPhotos(photos: result.photo.relatedCollections),
-                  ],
+          if (state is PhotoDetailsBlocState) {
+            return Container(
+              padding: const EdgeInsets.only(right: 16, left: 16),
+              child: Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      photoDetails(state, context),
+                      const SizedBox(height: 32),
+                      Text(
+                        context.getString(Strings.similarPhotos),
+                        style: Theme.of(context).textTheme.titleMedium,
+                      ),
+                      const SizedBox(height: 16),
+                      SimilarPhotos(photos: state.photo.relatedCollections),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          );
+            );
+          }
+
+          return Container();
         },
       ),
     );
@@ -75,7 +77,13 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 24),
-        ProfileActions(user: result.photo.user),
+        ProfileActions(
+          user: result.photo.user,
+          onFavourite: () {},
+          onDownload: () {
+            cubit?.downloadImage(result.photo.urls.regular);
+          },
+        ),
         const SizedBox(height: 24),
         ImageCard(
           imageUrl: result.photo.urls.regular,

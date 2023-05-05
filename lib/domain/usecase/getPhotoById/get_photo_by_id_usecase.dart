@@ -13,15 +13,15 @@ class GetPhotoByIdUseCase extends LaunchUseCaseWithParam<String, PhotoDvo> {
   @override
   void call(
     String param,
-    Function(PhotoDvo p1) result,
-    Function(Failure p1) onError,
-  ) {
+    Function(PhotoDvo p1) result, {
+    Function(Failure)? onError,
+  }) {
     launch(
       block: () => repository.getPhotoById(param),
       result: (value) {
         result(mapPhotoToDvo(value));
       },
-      error: onError,
+      error: (failure) => onError?.call(failure),
     );
   }
 }
