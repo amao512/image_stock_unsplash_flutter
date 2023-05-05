@@ -38,7 +38,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
           ),
         ],
       ),
-      body: BaseBlocProvider<PhotoDetailsCubit>(
+      body: BaseBlocProvider(
         bloc: cubit,
         builder: (context, state) {
           var result = state as PhotoDetailsBlocState;
@@ -54,7 +54,8 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
                     const SizedBox(height: 32),
                     const Text(
                       "Похожие фотографии",
-                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
                     SimiliarPhotos(),

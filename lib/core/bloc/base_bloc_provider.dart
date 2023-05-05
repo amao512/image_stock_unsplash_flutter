@@ -2,15 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_state.dart';
 
-class BaseBlocProvider<TBloc extends BlocBase<BaseBlocState>> extends BlocBuilder<TBloc, BaseBlocState> {
+class BaseBlocProvider<TBloc extends BlocBase<BaseBlocState>>
+    extends BlocBuilder<TBloc, BaseBlocState> {
+
   final TBloc? bloc;
   final BlocWidgetBuilder<Object> builder;
   final Widget Function()? error;
+  final Widget Function()? loader;
 
-  BaseBlocProvider({
+  const BaseBlocProvider({
+    super.key,
     required this.bloc,
     required this.builder,
     this.error,
+    this.loader,
   }) : super(bloc: bloc, builder: builder);
 
   @override
@@ -18,7 +23,7 @@ class BaseBlocProvider<TBloc extends BlocBase<BaseBlocState>> extends BlocBuilde
     if (state is ErrorBlocState) {
       return error?.call() ?? buildError(context, state);
     } else if (state is LoadingBlocState) {
-      return buildLoader();
+      return loader?.call() ?? buildLoader();
     } else if (state is ResultBlocState) {
       return builder(context, state.state);
     }
