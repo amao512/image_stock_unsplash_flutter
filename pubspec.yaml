@@ -51,6 +51,8 @@ dependencies:
 
   intl: ^0.17.0
   image_gallery_saver: '^1.7.1'
+  shared_preferences: ^2.1.0
+  localstorage: ^4.0.1+2
 
 
 dev_dependencies:

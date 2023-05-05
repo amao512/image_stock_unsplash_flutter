@@ -6,4 +6,10 @@ abstract class UnsplashRepository {
   Future<ResultApi<List<PhotoEntity>>> getPhotos();
 
   Future<ResultApi<PhotoEntity>> getPhotoById(String photoId);
+
+  List<PhotoEntity> getFavorites();
+
+  void savePhotoToFavorite(PhotoEntity photo);
+
+  void removeFromFavorite(String photoId);
 }

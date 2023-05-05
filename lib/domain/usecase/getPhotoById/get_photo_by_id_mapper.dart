@@ -1,3 +1,4 @@
+import 'package:image_stock_unsplash_flutter/core/utils/extensions/string_ext.dart';
 import 'package:image_stock_unsplash_flutter/data/models/photo_entity.dart';
 import 'package:image_stock_unsplash_flutter/data/models/related_collections_entity.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
@@ -6,7 +7,7 @@ import 'package:image_stock_unsplash_flutter/domain/usecase/getPhotos/get_photos
 
 PhotoDvo mapPhotoToDvo(PhotoEntity photo) {
   return PhotoDvo(
-    id: photo.id,
+    id: photo.id.orEmpty(),
     urls: mapUrlToDvo(photo.urls),
     user: mapUserToDvo(photo.user),
     tags: mapTagsToDvo(photo.tags ?? []),

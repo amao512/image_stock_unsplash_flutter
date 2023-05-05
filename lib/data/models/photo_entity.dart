@@ -6,9 +6,9 @@ part 'photo_entity.g.dart';
 
 @JsonSerializable()
 class PhotoEntity {
-  final String id;
-  final PhotoUrlEntity urls;
-  final PhotoUserEntity user;
+  final String? id;
+  final PhotoUrlEntity? urls;
+  final PhotoUserEntity? user;
   final List<PhotoTagEntity>? tags;
   @JsonKey(name: "related_collections", defaultValue: null)
   final RelatedCollectionsEntity? collections;
@@ -23,6 +23,8 @@ class PhotoEntity {
 
   factory PhotoEntity.fromJson(Map<String, dynamic> json) =>
       _$PhotoEntityFromJson(json);
+
+  static Map<String, dynamic> toJson(PhotoEntity entity) => _$PhotoEntityToJson(entity);
 }
 
 @JsonSerializable()

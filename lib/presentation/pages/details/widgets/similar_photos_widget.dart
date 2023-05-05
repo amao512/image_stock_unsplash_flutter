@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/related_collections_dvo.dart';
-import 'package:image_stock_unsplash_flutter/presentation/pages/home/widgets/image_card_widget.dart';
+import 'package:image_stock_unsplash_flutter/presentation/common/widgets/image_card_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/router/routes.dart';
 
 class SimilarPhotos extends StatelessWidget {

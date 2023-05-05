@@ -3,4 +3,5 @@ class Strings {
 
   static const similarTags = "similar_tags";
   static const similarPhotos = "similar_photos";
+  static const favorites = "favorites";
 }

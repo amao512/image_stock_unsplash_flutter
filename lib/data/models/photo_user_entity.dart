@@ -4,11 +4,11 @@ part 'photo_user_entity.g.dart';
 
 @JsonSerializable()
 class PhotoUserEntity {
-  final String id;
-  final String name;
-  final String username;
+  final String? id;
+  final String? name;
+  final String? username;
   @JsonKey(name: "profile_image")
-  final PhotoUserImageEntity image;
+  final PhotoUserImageEntity? image;
 
   PhotoUserEntity({
     required this.id,
@@ -22,9 +22,9 @@ class PhotoUserEntity {
 
 @JsonSerializable()
 class PhotoUserImageEntity {
-  final String small;
-  final String medium;
-  final String large;
+  final String? small;
+  final String? medium;
+  final String? large;
 
   PhotoUserImageEntity({
     required this.small,
