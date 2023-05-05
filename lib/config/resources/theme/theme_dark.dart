@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:image_stock_unsplash_flutter/config/resources/theme/theme.dart';
 
 import '../colors.dart';
 
-ThemeData darkTheme = ThemeData(
+ThemeData darkTheme = theme.copyWith(
   primaryColor: darkPrimaryColor,
   brightness: Brightness.dark,
   dividerColor: darkScaffoldBackgroundColor,
@@ -10,6 +11,9 @@ ThemeData darkTheme = ThemeData(
   indicatorColor: darkIndicatorColor,
   progressIndicatorTheme: ProgressIndicatorThemeData(color: darkIconColor),
   scaffoldBackgroundColor: darkScaffoldBackgroundColor,
+  colorScheme: ColorScheme.fromSwatch(
+    accentColor: darkPrimaryColor,
+  ),
   iconTheme: IconThemeData(color: darkIconColor),
   appBarTheme: AppBarTheme(
     color: darkAppBarColor,
@@ -23,18 +27,13 @@ ThemeData darkTheme = ThemeData(
     },
   ),
   inputDecorationTheme: InputDecorationTheme(
-    labelStyle: textStyle,
-    hintStyle: textStyle,
+    labelStyle: TextStyle(color: darkInputColor),
+    hintStyle: TextStyle(color: darkInputColor),
     border: darkOutlineInputBorder,
     enabledBorder: darkOutlineInputBorder,
     focusedBorder: darkOutlineInputBorder,
     disabledBorder: darkOutlineInputBorder,
   ),
-);
-
-TextStyle textStyle = TextStyle(
-  color: darkInputColor,
-  fontWeight: FontWeight.w500,
 );
 
 OutlineInputBorder darkOutlineInputBorder = OutlineInputBorder(

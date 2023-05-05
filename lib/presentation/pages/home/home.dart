@@ -8,8 +8,6 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // leading: Image.asset('assets/drawable/ic_logo.png'),
-        titleSpacing: 16.0,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16),

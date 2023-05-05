@@ -57,7 +57,7 @@ class PhotosListWidgetState extends State<PhotosListWidget> {
 
   Widget verticalListView(List<PhotoDvo> photos) {
     return ListView.separated(
-      separatorBuilder: (context, index) => const Divider(height: 18),
+      separatorBuilder: (context, index) => const Divider(),
       itemCount: photos.length,
       padding: const EdgeInsets.all(16),
       itemBuilder: (context, index) {

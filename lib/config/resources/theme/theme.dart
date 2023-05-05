@@ -1,42 +1,17 @@
 import 'package:flutter/material.dart';
-import '../colors.dart';
 
 ThemeData theme = ThemeData(
-  primaryColor: primaryColor,
-  brightness: Brightness.light,
-  dividerColor: scaffoldBackgroundColor,
-  accentColor: primaryColor,
-  indicatorColor: indicatorColor,
-  progressIndicatorTheme: ProgressIndicatorThemeData(color: indicatorColor),
-  scaffoldBackgroundColor: scaffoldBackgroundColor,
-  iconTheme: IconThemeData(color: iconColor),
-  appBarTheme: AppBarTheme(
-    color: appBarColor,
-    iconTheme: IconThemeData(color: appBarIconColor),
+  appBarTheme: const AppBarTheme(
+    titleSpacing: 16.0,
   ),
-  pageTransitionsTheme: const PageTransitionsTheme(builders: {
-    TargetPlatform.android: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-    TargetPlatform.fuchsia: CupertinoPageTransitionsBuilder(),
-  }),
-  inputDecorationTheme: InputDecorationTheme(
-    labelStyle: textStyle,
-    focusColor: inputColor,
-    hintStyle: textStyle,
-    border: outlineInputBorder,
-    enabledBorder: outlineInputBorder,
-    disabledBorder: outlineInputBorder,
+  dividerTheme: const DividerThemeData(space: 18),
+  textTheme: TextTheme(
+    titleMedium: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+    bodySmall: TextStyle(color: Colors.grey[800]),
   ),
-);
+    inputDecorationTheme: const InputDecorationTheme(
+      labelStyle: TextStyle(fontWeight: FontWeight.w500),
+      hintStyle: TextStyle(fontWeight: FontWeight.w500),
+    ),
 
-TextStyle textStyle = TextStyle(
-  color: inputColor,
-  fontWeight: FontWeight.w500,
-);
-
-OutlineInputBorder outlineInputBorder = OutlineInputBorder(
-  borderSide: BorderSide(
-    width: 2,
-    color: inputBorderColor,
-  ),
 );

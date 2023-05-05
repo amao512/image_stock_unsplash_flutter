@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 class PhotoTags extends StatelessWidget {
-
   final List<String> tags = [
     "Girl",
     "Woman",
@@ -27,12 +26,10 @@ class PhotoTags extends StatelessWidget {
               color: Colors.grey[300],
             ),
             padding: const EdgeInsets.all(8),
-            child: Text(tag,
-                style: TextStyle(color: Colors.grey[800])),
+            child: Text(tag, style: Theme.of(context).textTheme.bodySmall),
           ),
         );
       }).toList(),
     );
   }
-
 }

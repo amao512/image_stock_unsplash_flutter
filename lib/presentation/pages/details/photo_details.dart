@@ -32,7 +32,6 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        titleSpacing: 16,
         actions: const [
           Padding(
             padding: EdgeInsets.only(right: 16),
@@ -56,10 +55,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
                     const SizedBox(height: 32),
                     Text(
                       context.getString(Strings.similarPhotos),
-                      style: const TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
                     SimiliarPhotos(),
@@ -90,7 +86,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
         const SizedBox(height: 24),
         Text(
           context.getString(Strings.similarTags),
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+          style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
         PhotoTags(),
