@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:image_stock_unsplash_flutter/core/utils/localization/localizations_delegate.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/presentation/router/go_router.dart';
 
-import 'config/ui/theme.dart';
-import 'config/ui/theme_dark.dart';
+import 'config/resources//theme/theme.dart';
+import 'config/resources/strings.dart';
+import 'config/resources/theme/theme_dark.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,10 +21,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Image Stock',
+      localizationsDelegates: localDelegates(),
+      supportedLocales: AppLocalizationsDelegate.supportLocales,
+      title: Strings.appName,
       theme: theme,
       darkTheme: darkTheme,
       routerConfig: goRouter,
     );
+  }
+
+  List<LocalizationsDelegate> localDelegates() {
+    return [
+      AppLocalizationsDelegate(),
+      GlobalMaterialLocalizations.delegate,
+      GlobalWidgetsLocalizations.delegate,
+      GlobalCupertinoLocalizations.delegate,
+    ];
   }
 }

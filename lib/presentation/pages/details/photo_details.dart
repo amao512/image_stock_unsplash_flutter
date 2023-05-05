@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:image_stock_unsplash_flutter/config/resources/strings.dart';
 import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_provider.dart';
+import 'package:image_stock_unsplash_flutter/core/utils/localization/app_localizations.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_cubit.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_state.dart';
@@ -50,12 +52,14 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    photoDetails(result),
+                    photoDetails(result, context),
                     const SizedBox(height: 32),
-                    const Text(
-                      "Похожие фотографии",
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    Text(
+                      context.getString(Strings.similarPhotos),
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 16),
                     SimiliarPhotos(),
@@ -69,7 +73,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
     );
   }
 
-  Widget photoDetails(PhotoDetailsBlocState result) {
+  Widget photoDetails(PhotoDetailsBlocState result, BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -84,9 +88,9 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
           onTap: () {},
         ),
         const SizedBox(height: 24),
-        const Text(
-          "Похожие теги",
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        Text(
+          context.getString(Strings.similarTags),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         PhotoTags(),
