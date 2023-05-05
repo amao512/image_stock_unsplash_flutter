@@ -9,7 +9,7 @@ registerBloc() {
   );
 
   getIt.registerFactory(
-    () => PhotoDetailsCubit(getIt(), getIt(), getIt()),
+    () => PhotoDetailsCubit(getIt(), getIt(), getIt(), getIt(), getIt()),
   );
 
   getIt.registerFactory(() => FavoritesCubit(getIt()));

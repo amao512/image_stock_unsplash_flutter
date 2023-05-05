@@ -24,7 +24,7 @@ class _FavoritesPage extends State<FavoritesPage> {
 
   @override
   void initState() {
-    cubit = getIt<FavoritesCubit>();
+    cubit = getIt<FavoritesCubit>()..loadFavorites();
     super.initState();
   }
 
@@ -38,7 +38,7 @@ class _FavoritesPage extends State<FavoritesPage> {
         bloc: cubit,
         builder: (context, state) {
           if (state is FavoritesBlocState) {
-            Column(
+            return Column(
               children: [
                 SwitchListView(
                   isGridView: isGridView,

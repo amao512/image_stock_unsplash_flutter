@@ -8,11 +8,11 @@ import '../../core/model/result_api.dart';
 
 class UnsplashRepositoryImpl extends UnsplashRepository {
   final UnsplashApi api;
-  final FavoritesPhotoDataSource dataSource;
+  final FavoritesPhotoDatabase database;
 
   UnsplashRepositoryImpl({
     required this.api,
-    required this.dataSource,
+    required this.database,
   });
 
   @override
@@ -26,17 +26,22 @@ class UnsplashRepositoryImpl extends UnsplashRepository {
   }
 
   @override
-  List<PhotoEntity> getFavorites() {
-    return dataSource.getPhotos();
+  Future<List<PhotoEntity>> getFavorites() {
+    return database.getFavorites();
   }
 
   @override
-  void removeFromFavorite(String photoId) {
-    dataSource.removePhoto(photoId);
+  Future<PhotoEntity?> getFavoriteById(String imageId) {
+    return database.getFavoriteById(imageId);
   }
 
   @override
-  void savePhotoToFavorite(PhotoEntity photo) {
-    dataSource.savePhoto(photo);
+  Future<int> removeFromFavorite(String photoId) {
+    return database.deleteFromFavorites(photoId);
+  }
+
+  @override
+  Future<int> savePhotoToFavorite(PhotoEntity photo) {
+    return database.addToFavorite(photo);
   }
 }

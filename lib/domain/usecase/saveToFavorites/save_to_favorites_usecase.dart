@@ -14,7 +14,13 @@ class SaveToFavoritesUseCase extends LaunchUseCaseWithParam<PhotoDvo, Object> {
     PhotoDvo param,
     Function(Object p1) result, {
     Function(Failure p1)? onError,
-  }) {
-    repository.savePhotoToFavorite(mapPhotoToEntity(param));
+  }) async {
+    try {
+      var saved = await repository.savePhotoToFavorite(mapPhotoToEntity(param));
+
+      result(saved);
+    } catch (error) {
+      onError?.call(Failure(message: "Save Error"));
+    }
   }
 }

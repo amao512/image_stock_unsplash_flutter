@@ -15,7 +15,7 @@ class GetFavoritesUseCase extends LaunchUseCase<List<PhotoDvo>> {
     Function(Failure p1)? onError,
   }) async {
     try {
-      var favorites = repository.getFavorites();
+      var favorites = await repository.getFavorites();
       onResult(favorites.mapPhotoToDvo());
     } catch (error) {
       onError?.call(Failure(message: "DB Error!"));

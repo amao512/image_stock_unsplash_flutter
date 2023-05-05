@@ -12,7 +12,12 @@ class RemoveFromFavoritesUseCase extends LaunchUseCaseWithParam<String, Object> 
     String param,
     Function(Object p1) result, {
     Function(Failure p1)? onError,
-  }) {
-    repository.removeFromFavorite(param);
+  }) async {
+    try {
+      var success = await repository.removeFromFavorite(param);
+      result(success);
+    } catch (error) {
+      onError?.call(Failure(message: "Delete Error"));
+    }
   }
 }

@@ -69,9 +69,9 @@ class PhotoDetailsState extends State<PhotoDetails> {
       children: [
         const SizedBox(height: 24),
         ProfileActions(
-          user: result.photo.user,
-          onFavourite: () {
-            cubit?.saveToFavorite(result.photo);
+          state: result,
+          onFavourite: (isFavorite) {
+            cubit?.onFavorite(result.photo, isFavorite);
           },
           onDownload: () {
             cubit?.downloadImage(result.photo.urls.regular);
