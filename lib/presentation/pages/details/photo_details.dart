@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:image_stock_unsplash_flutter/core/ui/base_state.dart';
+import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_provider.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_cubit.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_state.dart';
@@ -17,15 +17,17 @@ class PhotoDetailsPage extends StatefulWidget {
   State<StatefulWidget> createState() => PhotoDetailsState();
 }
 
-class PhotoDetailsState extends BaseState<PhotoDetailsPage, PhotoDetailsCubit,
-    PhotoDetailsBlocState> {
+class PhotoDetailsState extends State<PhotoDetailsPage> {
+  PhotoDetailsCubit? cubit;
+
   @override
-  PhotoDetailsCubit createBloc(BuildContext context) {
-    return getIt<PhotoDetailsCubit>()..loadPhotoById(widget.photoId);
+  void initState() {
+    cubit = getIt<PhotoDetailsCubit>()..loadPhotoById(widget.photoId);
+    super.initState();
   }
 
   @override
-  Widget buildWidget(BuildContext context, PhotoDetailsBlocState result) {
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         titleSpacing: 16,
@@ -36,25 +38,32 @@ class PhotoDetailsState extends BaseState<PhotoDetailsPage, PhotoDetailsCubit,
           ),
         ],
       ),
-      body: Container(
-        padding: const EdgeInsets.only(right: 16, left: 16),
-        child: Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                photoDetails(result),
-                const SizedBox(height: 32),
-                const Text(
-                  "Похожие фотографии",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      body: BaseBlocProvider<PhotoDetailsCubit>(
+        bloc: cubit,
+        builder: (context, state) {
+          var result = state as PhotoDetailsBlocState;
+
+          return Container(
+            padding: const EdgeInsets.only(right: 16, left: 16),
+            child: Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    photoDetails(result),
+                    const SizedBox(height: 32),
+                    const Text(
+                      "Похожие фотографии",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 16),
+                    SimiliarPhotos(),
+                  ],
                 ),
-                const SizedBox(height: 16),
-                SimiliarPhotos(),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }

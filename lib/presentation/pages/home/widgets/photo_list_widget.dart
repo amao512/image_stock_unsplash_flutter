@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_stock_unsplash_flutter/core/ui/base_state.dart';
+import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_provider.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos_cubit.dart';
@@ -16,36 +16,43 @@ class PhotosListWidget extends StatefulWidget {
   State<StatefulWidget> createState() => PhotosListWidgetState();
 }
 
-class PhotosListWidgetState extends BaseState<PhotosListWidget, PhotosCubit, PhotosState> {
+class PhotosListWidgetState extends State<PhotosListWidget> {
   var isGridView = false;
+  PhotosCubit? cubit;
 
   @override
-  PhotosCubit createBloc(BuildContext context) {
-    return getIt<PhotosCubit>()..loadPhotos();
+  void initState() {
+    cubit = getIt<PhotosCubit>()..loadPhotos();
+    super.initState();
   }
 
   @override
-  Widget buildWidget(BuildContext context, PhotosState result) {
-    if (result is PhotosLoadedState) {
-      return Column(
-        children: [
-          SwitchListView(
-            isGridView: isGridView,
-            onSelect: (isGridView) {
-              setState(() {
-                this.isGridView = isGridView;
-              });
-            },
-          ),
-          Expanded(
-              child: isGridView
-                  ? gridListView(result.photos)
-                  : verticalListView(result.photos))
-        ],
-      );
-    } else {
-      return Container();
-    }
+  Widget build(BuildContext context) {
+    return BaseBlocProvider(
+      bloc: cubit,
+      builder: (context, state) {
+        if (state is PhotosLoadedState) {
+          return Column(
+            children: [
+              SwitchListView(
+                isGridView: isGridView,
+                onSelect: (isGridView) {
+                  setState(() {
+                    this.isGridView = isGridView;
+                  });
+                },
+              ),
+              Expanded(
+                  child: isGridView
+                      ? gridListView(state.photos)
+                      : verticalListView(state.photos))
+            ],
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   Widget verticalListView(List<PhotoDvo> photos) {
