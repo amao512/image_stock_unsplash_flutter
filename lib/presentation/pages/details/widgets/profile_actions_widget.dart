@@ -1,33 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:image_stock_unsplash_flutter/core/ui/widgets/round_network_image.dart';
+import 'package:image_stock_unsplash_flutter/domain/model/photo_user_dvo.dart';
 
 class ProfileActions extends StatelessWidget {
-    final String profileImage;
+    final PhotoUserDvo user;
 
-  const ProfileActions({super.key, required this.profileImage});
+  const ProfileActions({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        const RoundedNetworkImage(
+        RoundedNetworkImage(
           width: 48,
           height: 48,
-          imageUrl: "https://s8.vcdn.biz/static/f/5864270381/image.jpg",
+          imageUrl: user.image.large,
         ),
         const SizedBox(width: 10),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
-                "Shrek",
-                style: TextStyle(fontSize: 18),
+                user.name,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
-              SizedBox(height: 2),
+              const SizedBox(height: 2),
               Text(
-                "@shrek",
-                style: TextStyle(color: Colors.grey),
+                user.username,
+                style: Theme.of(context).textTheme.bodySmall,
               ),
             ],
           ),

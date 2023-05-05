@@ -58,7 +58,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
-                    SimiliarPhotos(),
+                    SimilarPhotos(photos: result.photo.relatedCollections),
                   ],
                 ),
               ),
@@ -75,9 +75,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const SizedBox(height: 24),
-        const ProfileActions(
-          profileImage: "https://s8.vcdn.biz/static/f/5864270381/image.jpg",
-        ),
+        ProfileActions(user: result.photo.user),
         const SizedBox(height: 24),
         ImageCard(
           imageUrl: result.photo.urls.regular,
@@ -89,7 +87,7 @@ class PhotoDetailsState extends State<PhotoDetailsPage> {
           style: Theme.of(context).textTheme.titleMedium,
         ),
         const SizedBox(height: 16),
-        PhotoTags(),
+        PhotoTags(tags: result.photo.tags),
       ],
     );
   }

@@ -1,16 +1,20 @@
 import 'package:image_stock_unsplash_flutter/domain/model/photo_user_dvo.dart';
 
+import 'related_collections_dvo.dart';
+
 class PhotoDvo {
   final String id;
   final PhotoUrlDvo urls;
-  // final PhotoUserDvo user;
-  // final List<PhotoTagDvo> tags;
+  final PhotoUserDvo user;
+  final List<PhotoTagDvo> tags;
+  final RelatedCollectionsDvo relatedCollections;
 
   PhotoDvo({
     required this.id,
     required this.urls,
-    // required this.user,
-    // required this.tags,
+    required this.user,
+    required this.tags,
+    required this.relatedCollections,
   });
 }
 

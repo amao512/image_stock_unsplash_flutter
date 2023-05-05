@@ -7,10 +7,6 @@ class PhotoUserEntity {
   final String id;
   final String name;
   final String username;
-  @JsonKey(name: "first_name")
-  final String firstName;
-  @JsonKey(name: "last_name")
-  final String lastName;
   @JsonKey(name: "profile_image")
   final PhotoUserImageEntity image;
 
@@ -18,8 +14,6 @@ class PhotoUserEntity {
     required this.id,
     required this.name,
     required this.username,
-    required this.firstName,
-    required this.lastName,
     required this.image,
   });
 

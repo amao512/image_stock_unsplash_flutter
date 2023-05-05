@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
 
 class PhotoTags extends StatelessWidget {
-  final List<String> tags = [
-    "Girl",
-    "Woman",
-    "Mood",
-    "People",
-    "Free Pictures",
-    "Free asd",
-    "Free ASD",
-    "Free aD",
-  ];
+  final List<PhotoTagDvo> tags;
+
+  const PhotoTags({super.key, required this.tags});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +20,7 @@ class PhotoTags extends StatelessWidget {
               color: Colors.grey[300],
             ),
             padding: const EdgeInsets.all(8),
-            child: Text(tag, style: Theme.of(context).textTheme.bodySmall),
+            child: Text(tag.title, style: Theme.of(context).textTheme.bodySmall),
           ),
         );
       }).toList(),

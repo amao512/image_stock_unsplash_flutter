@@ -29,7 +29,7 @@ class RestClient {
         },
         onResponse: (response, handler) async {
           if (kDebugMode) {
-            print('Response: ${response.statusCode} - ${response.data}');
+            print('Status code: ${response.statusCode} - ${response.data}');
           }
 
           return handler.next(response);

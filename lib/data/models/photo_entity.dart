@@ -1,4 +1,5 @@
 import 'package:image_stock_unsplash_flutter/data/models/photo_user_entity.dart';
+import 'package:image_stock_unsplash_flutter/data/models/related_collections_entity.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'photo_entity.g.dart';
@@ -7,14 +8,17 @@ part 'photo_entity.g.dart';
 class PhotoEntity {
   final String id;
   final PhotoUrlEntity urls;
-  // final PhotoUserEntity user;
-  // @JsonKey(defaultValue: [])
-  // final List<PhotoTagEntity>? tags;
+  final PhotoUserEntity user;
+  final List<PhotoTagEntity>? tags;
+  @JsonKey(name: "related_collections", defaultValue: null)
+  final RelatedCollectionsEntity? collections;
 
   PhotoEntity({
     required this.id,
     required this.urls,
-    // required this.user,
+    required this.user,
+    required this.tags,
+    required this.collections
   });
 
   factory PhotoEntity.fromJson(Map<String, dynamic> json) =>
