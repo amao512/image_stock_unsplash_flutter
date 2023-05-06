@@ -26,6 +26,9 @@ ThemeData darkTheme = theme.copyWith(
     enabledBorder: darkOutlineInputBorder,
     focusedBorder: darkOutlineInputBorder,
     disabledBorder: darkOutlineInputBorder,
+    iconColor: Colors.white,
+    prefixIconColor: Colors.white,
+    suffixIconColor: Colors.white,
   ),
 );
 

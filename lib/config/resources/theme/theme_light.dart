@@ -26,6 +26,12 @@ ThemeData lightTheme = theme.copyWith(
     border: outlineInputBorder,
     enabledBorder: outlineInputBorder,
     disabledBorder: outlineInputBorder,
+    iconColor: Colors.black,
+    prefixIconColor: Colors.black,
+    suffixIconColor: Colors.black,
+    focusedBorder: const OutlineInputBorder(
+        borderSide: BorderSide(color: Colors.black)
+    ),
   ),
 );
 
