@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_stock_unsplash_flutter/core/utils/extensions/string_ext.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/search/bloc/search_photo_cubit.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/search/widgets/search_results_widget.dart';
@@ -7,7 +8,9 @@ import 'package:image_stock_unsplash_flutter/presentation/pages/search/widgets/s
 import 'widgets/search_field_widget.dart';
 
 class SearchBottomSheet extends StatefulWidget {
-  const SearchBottomSheet({super.key});
+  final String? query;
+
+  const SearchBottomSheet({super.key, this.query});
 
   @override
   State<StatefulWidget> createState() => _SearchBottomSheet();
@@ -15,6 +18,15 @@ class SearchBottomSheet extends StatefulWidget {
 
 class _SearchBottomSheet extends State<SearchBottomSheet> {
   String _query = '';
+
+  @override
+  void initState() {
+    if (widget.query != null) {
+      _query = widget.query!;
+    }
+
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,11 +43,14 @@ class _SearchBottomSheet extends State<SearchBottomSheet> {
               onPressed: () => Navigator.of(context).pop(),
               icon: const Icon(Icons.close, size: 24),
             ),
-            SearchField(onSearch: (query) {
-              setState(() {
-                _query = query;
-              });
-            }),
+            SearchField(
+              query: widget.query.orEmpty(),
+              onSearch: (query) {
+                setState(() {
+                  _query = query;
+                });
+              },
+            ),
             const SizedBox(height: 16),
             SearchResults(query: _query),
           ],

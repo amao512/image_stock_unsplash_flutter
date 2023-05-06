@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_stock_unsplash_flutter/config/resources/strings.dart';
 import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_builder.dart';
+import 'package:image_stock_unsplash_flutter/core/ui/modalBottomSheet/top_rounded_bottom_sheet_modal.dart';
 import 'package:image_stock_unsplash_flutter/core/utils/localization/app_localizations.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
@@ -9,6 +10,7 @@ import 'package:image_stock_unsplash_flutter/presentation/common/widgets/image_c
 import 'package:image_stock_unsplash_flutter/presentation/common/widgets/switch_list_view_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/favorites/bloc/favorites_cubit.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/favorites/bloc/favorites_state.dart';
+import 'package:image_stock_unsplash_flutter/presentation/pages/search/search_bottom_sheet.dart';
 import 'package:image_stock_unsplash_flutter/presentation/router/routes.dart';
 
 class FavoritesPage extends StatefulWidget {
@@ -33,6 +35,16 @@ class _FavoritesPage extends State<FavoritesPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(context.getString(Strings.favorites)),
+        actions: [
+          IconButton(
+            onPressed: () {
+              context.showFullHeightModalBottomSheet(
+                widget: const SearchBottomSheet(),
+              );
+            },
+            icon: const Icon(Icons.search),
+          ),
+        ],
       ),
       body: BaseBlocBuilder(
         bloc: cubit,
@@ -86,7 +98,7 @@ class _FavoritesPage extends State<FavoritesPage> {
       crossAxisCount: 2,
       children: List.generate(
         photos.length,
-            (index) {
+        (index) {
           return ImageCard(
             imageUrl: photos[index].urls.regular,
             onTap: () {

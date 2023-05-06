@@ -3,9 +3,14 @@ import 'package:image_stock_unsplash_flutter/config/resources/strings.dart';
 import 'package:image_stock_unsplash_flutter/core/utils/localization/app_localizations.dart';
 
 class SearchField extends StatefulWidget {
+  final String query;
   final Function(String) onSearch;
 
-  const SearchField({super.key, required this.onSearch});
+  const SearchField({
+    super.key,
+    required this.query,
+    required this.onSearch,
+  });
 
   @override
   State<StatefulWidget> createState() => _SearchField();
@@ -18,6 +23,7 @@ class _SearchField extends State<SearchField> {
   @override
   void initState() {
     super.initState();
+    _searchController.text = widget.query;
     _searchController.addListener(_onSearchTextChanged);
   }
 
