@@ -2,6 +2,7 @@ import 'package:image_stock_unsplash_flutter/core/utils/extensions/network_ext.d
 import 'package:image_stock_unsplash_flutter/data/api/unsplash_api.dart';
 import 'package:image_stock_unsplash_flutter/data/db/favorites_db.dart';
 import 'package:image_stock_unsplash_flutter/data/models/photo_entity.dart';
+import 'package:image_stock_unsplash_flutter/data/models/search_results_entity.dart';
 import 'package:image_stock_unsplash_flutter/data/repository/unsplash_repository.dart';
 
 import '../../core/model/result_api.dart';
@@ -23,6 +24,11 @@ class UnsplashRepositoryImpl extends UnsplashRepository {
   @override
   Future<ResultApi<PhotoEntity>> getPhotoById(String photoId) {
     return api.getPhotoById(photoId).request();
+  }
+
+  @override
+  Future<ResultApi<SearchResultsEntity>> searchPhotos(String query, int page) {
+    return api.searchPhotos(query, page).request();
   }
 
   @override

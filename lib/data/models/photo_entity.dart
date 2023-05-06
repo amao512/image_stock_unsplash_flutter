@@ -24,7 +24,7 @@ class PhotoEntity {
   factory PhotoEntity.fromJson(Map<String, dynamic> json) =>
       _$PhotoEntityFromJson(json);
 
-  static Map<String, dynamic> toJson(PhotoEntity entity) => _$PhotoEntityToJson(entity);
+  Map<String, dynamic> toJson() => _$PhotoEntityToJson(this);
 }
 
 @JsonSerializable()

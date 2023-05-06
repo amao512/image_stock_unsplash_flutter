@@ -5,6 +5,7 @@ import 'package:image_stock_unsplash_flutter/domain/usecase/getPhotoById/get_pho
 import 'package:image_stock_unsplash_flutter/domain/usecase/getPhotos/get_photos_usecase.dart';
 import 'package:image_stock_unsplash_flutter/domain/usecase/removeFromFavorites/remove_from_favorites_usecase.dart';
 import 'package:image_stock_unsplash_flutter/domain/usecase/saveToFavorites/save_to_favorites_usecase.dart';
+import 'package:image_stock_unsplash_flutter/domain/usecase/searchPhotos/search_photos_usecase.dart';
 
 import 'init_locator.dart';
 
@@ -16,6 +17,8 @@ registerUseCase() {
   getIt.registerFactory(
     () => GetPhotoByIdUseCase(getIt()),
   );
+
+  getIt.registerFactory(() => SearchPhotosUseCase(getIt()));
 
   getIt.registerFactory(() => DownloadImageUseCase());
 
