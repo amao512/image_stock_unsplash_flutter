@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:image_stock_unsplash_flutter/config/resources/strings.dart';
-import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_provider.dart';
+import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_builder.dart';
 import 'package:image_stock_unsplash_flutter/core/utils/localization/app_localizations.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
@@ -34,7 +34,7 @@ class _FavoritesPage extends State<FavoritesPage> {
       appBar: AppBar(
         title: Text(context.getString(Strings.favorites)),
       ),
-      body: BaseBlocProvider(
+      body: BaseBlocBuilder(
         bloc: cubit,
         builder: (context, state) {
           if (state is FavoritesBlocState) {

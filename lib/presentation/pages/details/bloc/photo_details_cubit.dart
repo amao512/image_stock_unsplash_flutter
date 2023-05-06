@@ -38,13 +38,9 @@ class PhotoDetailsCubit extends BaseCubit<PhotoDetailsBlocState> {
 
   void onFavorite(PhotoDvo photo, bool isFavorite) {
     if (isFavorite) {
-      removeFromFavoritesUseCase(photo.id, (result) {
-
-      });
+      removeFromFavoritesUseCase(photo.id, (result) {});
     } else {
-      saveToFavoritesUseCase(photo, (result) {
-
-      });
+      saveToFavoritesUseCase(photo, (result) {});
     }
   }
 

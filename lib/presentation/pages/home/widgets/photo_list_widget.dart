@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_provider.dart';
-import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
+import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_builder.dart';
 import 'package:image_stock_unsplash_flutter/domain/model/photo_dvo.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos_cubit.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/home/bloc/photos_state.dart';
@@ -18,18 +18,11 @@ class PhotosListWidget extends StatefulWidget {
 
 class PhotosListWidgetState extends State<PhotosListWidget> {
   var isGridView = false;
-  PhotosCubit? cubit;
-
-  @override
-  void initState() {
-    cubit = getIt<PhotosCubit>()..loadPhotos();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return BaseBlocProvider(
-      bloc: cubit,
+    return BaseBlocBuilder(
+      bloc: context.read<PhotosCubit>()..loadPhotos(),
       builder: (context, state) {
         if (state is PhotosLoadedState) {
           return Column(

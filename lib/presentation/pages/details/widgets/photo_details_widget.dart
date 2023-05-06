@@ -1,38 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_stock_unsplash_flutter/config/resources/strings.dart';
-import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_provider.dart';
+import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_builder.dart';
 import 'package:image_stock_unsplash_flutter/core/utils/localization/app_localizations.dart';
 import 'package:image_stock_unsplash_flutter/di/init_locator.dart';
+import 'package:image_stock_unsplash_flutter/presentation/common/widgets/image_card_widget.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_cubit.dart';
 import 'package:image_stock_unsplash_flutter/presentation/pages/details/bloc/photo_details_state.dart';
-import 'package:image_stock_unsplash_flutter/presentation/common/widgets/image_card_widget.dart';
 
 import 'profile_actions_widget.dart';
 import 'similar_photos_widget.dart';
 import 'tags_widget.dart';
 
-class PhotoDetails extends StatefulWidget {
+class PhotoDetails extends StatelessWidget {
   final String photoId;
 
   const PhotoDetails({required this.photoId, super.key});
 
   @override
-  State<StatefulWidget> createState() => PhotoDetailsState();
-}
-
-class PhotoDetailsState extends State<PhotoDetails> {
-  PhotoDetailsCubit? cubit;
-
-  @override
-  void initState() {
-    cubit = getIt<PhotoDetailsCubit>()..loadPhotoById(widget.photoId);
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return BaseBlocProvider(
-      bloc: cubit,
+    return BaseBlocBuilder(
+      bloc: getIt<PhotoDetailsCubit>()..loadPhotoById(photoId),
       builder: (context, state) {
         if (state is PhotoDetailsBlocState) {
           return Container(
@@ -63,6 +51,8 @@ class PhotoDetailsState extends State<PhotoDetails> {
   }
 
   Widget photoDetails(PhotoDetailsBlocState result, BuildContext context) {
+    var cubit = context.read<PhotoDetailsCubit>();
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -71,10 +61,10 @@ class PhotoDetailsState extends State<PhotoDetails> {
         ProfileActions(
           state: result,
           onFavourite: (isFavorite) {
-            cubit?.onFavorite(result.photo, isFavorite);
+            cubit.onFavorite(result.photo, isFavorite);
           },
           onDownload: () {
-            cubit?.downloadImage(result.photo.urls.regular);
+            cubit.downloadImage(result.photo.urls.regular);
           },
         ),
         const SizedBox(height: 24),

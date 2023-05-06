@@ -3,14 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_stock_unsplash_flutter/core/bloc/base_bloc_state.dart';
 import 'package:image_stock_unsplash_flutter/core/utils/extensions/context_ext.dart';
 
-class BaseBlocProvider<TBloc extends BlocBase<BaseBlocState>>
+class BaseBlocBuilder<TBloc extends BlocBase<BaseBlocState>>
     extends BlocBuilder<TBloc, BaseBlocState> {
 
   final TBloc? bloc;
   final BlocWidgetBuilder<Object> builder;
   final Widget Function()? loader;
 
-  const BaseBlocProvider({
+  const BaseBlocBuilder({
     super.key,
     required this.bloc,
     required this.builder,
